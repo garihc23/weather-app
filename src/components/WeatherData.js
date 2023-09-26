@@ -1,4 +1,4 @@
-import React ,{ useState }from 'react'
+import React ,{ useState, useTransition }from 'react'
 import '../assets/css/WeatherData.css'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,9 +14,10 @@ const WeatherData = () => {
     const apiKey= "961f1ac472543e227063e8d1ccdb64dc"
     const [weatherData, setWeatherData] = useState([{}])
     const [city, setCity] = useState("")
+    const [tempUnit, setTempUnit] = useState('imperial')
 
     const getWeather=(e) =>{
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&AppID=${apiKey}`)
+        fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${tempUnit}&AppID=${apiKey}`)
         .then(
             response => response.json()
         ).then(
@@ -37,10 +38,15 @@ const WeatherData = () => {
         }
       };
     
-      const handleSearchButtonClick = () => {
-        getWeather(null);
-      };
-
+    const handleSearchButtonClick = () => {
+    getWeather(null);
+    };
+    const handleUnitToggle = () =>{/* 
+        setTempUnit(tempUnit ==='imperial' ? 'metric' : 'impertial'); */
+        setTempUnit((prevUnit) => (
+            prevUnit === 'imperial' ? 'metric' : 'imperial'
+            ));
+    };
   return (
     <div className='container'>
         <InputGroup className='mb-3 input'>
@@ -53,25 +59,38 @@ const WeatherData = () => {
             <Button variant='primary' onClick={handleSearchButtonClick}>
                 <FontAwesomeIcon icon={faSearch} /> Search
             </Button>
-      </InputGroup>
-
+        </InputGroup>
+       
 
         {weatherData && weatherData.list && weatherData.list[0] ? (
-            <div className='weather-data'>
-                <p className='city'>
-                    <FontAwesomeIcon icon={faCity} /> {weatherData.city.name}
-                </p>
-                <p className='temp'>
-                    <FontAwesomeIcon icon={faTemperatureHigh} /> {Math.round(weatherData.list[0].main.temp)} °F
-                </p>
-                <p className='weather'>
-                    {weatherData.list[0].weather[0].main === 'Rain' ? (
-                    <FontAwesomeIcon icon={faCloudShowersHeavy} />
-                    ) : (
-                    <FontAwesomeIcon icon={faCloud} />
-                    )}{' '}
-                    {weatherData.list[0].weather[0].main}
-                </p>
+            <div>
+                <div className='unit-toggle'>
+                    <label className='switch'>
+                        <input type = 'checkbox' onClick = {handleUnitToggle} />
+                        <span className='slider round'></span>
+                    </label>
+                    <span className='unit-label'>{tempUnit === 'imperial' ? '°F' : '°C'}</span>
+                </div>
+                <div className='weather-data'>
+                    <p className='city'>
+                        <FontAwesomeIcon icon={faCity} /> {weatherData.city.name}
+                    </p>
+                    <p className='temp'>
+                        <FontAwesomeIcon icon={faTemperatureHigh} /> 
+                        {tempUnit === 'imperial'
+                            ? `${Math.round(weatherData.list[0].main.temp)} °F`
+                            : `${Math.round((weatherData.list[0].main.temp - 32) * 5/9)} °C`
+                        }
+                    </p>
+                    <p className='weather'>
+                        {weatherData.list[0].weather[0].main === 'Rain' ? (
+                        <FontAwesomeIcon icon={faCloudShowersHeavy} />
+                        ) : (
+                        <FontAwesomeIcon icon={faCloud} />
+                        )}{' '}
+                        {weatherData.list[0].weather[0].main}
+                    </p>
+                </div>
             </div>
         ) : (
             <div> 
