@@ -1,5 +1,14 @@
 import React ,{ useState }from 'react'
 import '../assets/css/WeatherData.css'
+import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faSearch, 
+    faCloudShowersHeavy, 
+    faCloud, 
+    faTemperatureHigh, 
+    faCity 
+} from '@fortawesome/free-solid-svg-icons';
 const WeatherData = () => {
 
     const apiKey= "961f1ac472543e227063e8d1ccdb64dc"
@@ -34,24 +43,35 @@ const WeatherData = () => {
 
   return (
     <div className='container'>
-        <input 
-            className='input' 
-            placeholder='Type City Here..'
-            onChange={e => setCity(e.target.value)}
-            value={city}
-            onKeyPress={handleKeyPress}
-        />
-        <button
-            onClick={handleSearchButtonClick}
-        >
-            Search
-        </button>
+        <InputGroup className='mb-3 input'>
+            <FormControl
+                placeholder='Type City Here..'
+                onChange={e => setCity(e.target.value)}
+                value={city}
+                onKeyPress={handleKeyPress}
+            />
+            <Button variant='primary' onClick={handleSearchButtonClick}>
+                <FontAwesomeIcon icon={faSearch} /> Search
+            </Button>
+      </InputGroup>
+
 
         {weatherData && weatherData.list && weatherData.list[0] ? (
             <div className='weather-data'>
-                <p className='city'>{weatherData.city.name}</p>
-                <p className='temp'>{Math.round(weatherData.list[0].main.temp)} F</p>
-                <p className='weather'>{weatherData.list[0].weather[0].main}</p>
+                <p className='city'>
+                    <FontAwesomeIcon icon={faCity} /> {weatherData.city.name}
+                </p>
+                <p className='temp'>
+                    <FontAwesomeIcon icon={faTemperatureHigh} /> {Math.round(weatherData.list[0].main.temp)} °F
+                </p>
+                <p className='weather'>
+                    {weatherData.list[0].weather[0].main === 'Rain' ? (
+                    <FontAwesomeIcon icon={faCloudShowersHeavy} />
+                    ) : (
+                    <FontAwesomeIcon icon={faCloud} />
+                    )}{' '}
+                    {weatherData.list[0].weather[0].main}
+                </p>
             </div>
         ) : (
             <div> 
@@ -59,7 +79,7 @@ const WeatherData = () => {
             </div>
         )}
          {weatherData.cod ==='404'?(
-                <p>City not found.</p>
+               <p className='error-message'>City not found.</p>
             ) : (
                 <></>
             )
