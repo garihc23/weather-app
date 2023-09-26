@@ -89,7 +89,10 @@ const WeatherData = () => {
             <div>
                 <div className='unit-toggle'>
                     <label className='switch'>
-                        <input type = 'checkbox' onClick = {handleUnitToggle} />
+                        <input 
+                            type = 'checkbox' 
+                            onChange={() => setTempUnit(tempUnit === 'metric' ? 'imperial' : 'metric')}
+                            onClick = {handleUnitToggle} />
                         <span className='slider round'></span>
                     </label>
                     <span className='unit-label'>{tempUnit === 'imperial' ? '°F' : '°C'}</span>
