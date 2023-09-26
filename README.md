@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Weather App Readme
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack
+- **Frontend**: React
+- **Styling**: CSS, React Bootstrap
+- **Icons**: Font Awesome
 
-## Available Scripts
+## Description
+This Weather App allows users to retrieve weather information for a specific city or based on their current location using geolocation. The app provides real-time weather data including temperature, weather conditions, and city name.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Manual Search**: Users can manually search for weather information by entering a city name and pressing the search button or hitting Enter.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Geolocation**: The app has an option to get weather data based on the user's current location using geolocation.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Temperature Units**: Users can toggle between Celsius and Fahrenheit using a slider button.
 
-### `npm test`
+- **Weather Conditions**: The app displays weather conditions using icons and descriptions (e.g., sunny, cloudy, rainy).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Run
 
-### `npm run build`
+1. Clone the repository to your local machine.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+git clone <repository-url>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+cd weather-app
+```
 
-### `npm run eject`
+3. Install the necessary dependencies.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Start the application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Open your web browser and go to [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## How to Use
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Enter the name of a city in the input field.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Press the search button or hit Enter to fetch the weather data for the specified city.
 
-### Code Splitting
+3. To switch between Celsius and Fahrenheit, use the temperature unit slider.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. Click the geolocation button to retrieve weather data based on your current location.
 
-### Analyzing the Bundle Size
+5. The weather data will be displayed, including the city name, temperature, and weather conditions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+6. If the city is not found, an error message will be shown.
 
-### Making a Progressive Web App
+## Known Issues
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- In some cases, the geolocation feature may not work due to browser settings or lack of support.
 
-### Advanced Configuration
+## Future Enhancements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Add more detailed weather information such as humidity, wind speed, and visibility.
 
-### Deployment
+- Implement user authentication to save favorite cities and customize settings.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Improve the UI for a more user-friendly experience.
 
-### `npm run build` fails to minify
+- Provide suggestions for city names as the user types.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contributors
+
+- [garihc23](https://github.com/garihc23)
