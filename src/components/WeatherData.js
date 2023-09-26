@@ -1,4 +1,5 @@
 import React ,{ useState }from 'react'
+import '../assets/css/WeatherData.css'
 const WeatherData = () => {
 
     const apiKey= "961f1ac472543e227063e8d1ccdb64dc"
@@ -6,18 +7,31 @@ const WeatherData = () => {
     const [city, setCity] = useState("")
 
     const getWeather=(e) =>{
-        if(e.key=== 'Enter'){
-            fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&AppID=${apiKey}`)
-            .then(
-                response => response.json()
-            ).then(
-                data => {
-                    setWeatherData(data)
-                }
-            )
-        }
+        fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&AppID=${apiKey}`)
+        .then(
+            response => response.json()
+        ).then(
+            data => {
+                setWeatherData(data)
+            }
+        )
+        .catch((error) => {
+            console.error('Error fetching weather data', error)
+        })
     }
+    
     /* console.log("WeatherData---", weatherData) */
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+          getWeather(e);
+        }
+      };
+    
+      const handleSearchButtonClick = () => {
+        getWeather(null);
+      };
+
   return (
     <div className='container'>
         <input 
@@ -25,10 +39,10 @@ const WeatherData = () => {
             placeholder='Type City Here..'
             onChange={e => setCity(e.target.value)}
             value={city}
-            onKeyPress={getWeather}
+            onKeyPress={handleKeyPress}
         />
         <button
-            onClick={getWeather}
+            onClick={handleSearchButtonClick}
         >
             Search
         </button>
