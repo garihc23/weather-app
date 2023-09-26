@@ -44,6 +44,12 @@ const WeatherData = () => {
                 <p>Welcome to weather app!</p>
             </div>
         )}
+         {weatherData.cod ==='404'?(
+                <p>City not found.</p>
+            ) : (
+                <></>
+            )
+        }
     </div>
   )
 }
