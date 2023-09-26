@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faSearch, 
     faCloudShowersHeavy, 
+    faSun, 
     faCloud, 
+    faCloudRain,
     faTemperatureHigh, 
     faCity 
 } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +33,28 @@ const WeatherData = () => {
     }
     
     /* console.log("WeatherData---", weatherData) */
-
+    let weatherIcon, weatherDescription;
+    if (weatherData && weatherData.list && weatherData.list[0]) {
+        const weatherCondition = weatherData.list[0].weather[0].main;
+        switch (weatherCondition) {
+            case 'Clear':
+                weatherIcon = <FontAwesomeIcon icon={faSun} />;
+                weatherDescription = 'Sunny';
+            break;
+            case 'Clouds':
+                weatherIcon = <FontAwesomeIcon icon={faCloud} />;
+                weatherDescription = 'Cloudy';
+            break;
+            case 'Rain':
+                weatherIcon = <FontAwesomeIcon icon={faCloudRain} />;
+                weatherDescription = 'Rainy';
+            break;
+            // Add more cases for other weather conditions as needed
+            default:
+                weatherIcon = null;
+                weatherDescription = 'Unknown';
+        }
+    }
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
           getWeather(e);
@@ -83,12 +106,14 @@ const WeatherData = () => {
                         }
                     </p>
                     <p className='weather'>
-                        {weatherData.list[0].weather[0].main === 'Rain' ? (
-                        <FontAwesomeIcon icon={faCloudShowersHeavy} />
-                        ) : (
-                        <FontAwesomeIcon icon={faCloud} />
-                        )}{' '}
-                        {weatherData.list[0].weather[0].main}
+                    {weatherIcon && 
+                        <div className='weather-icon'>
+                            {weatherIcon}
+                            <p className='weather-description'>
+                                {weatherDescription}
+                            </p>
+                        </div>}
+                    
                     </p>
                 </div>
             </div>
